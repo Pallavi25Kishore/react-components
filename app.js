@@ -9,7 +9,7 @@ const GroceryList = () => (<ul>
   <Cucumbers />
   <Kale />
 </ul>);
-ReactDOM.render(<GroceryList />, document.getElementById('app'));*/
+ReactDOM.render(<GroceryList />, document.getElementById('app'));
 
 //component properties aka props
 const GroceryListItem = (props) => (
@@ -22,10 +22,40 @@ const GroceryList = (props) => (
     ))}
   </ul>
 );
-ReactDOM.render(<GroceryList items={['kale', 'cucumbers']}/>, document.getElementById('app'));
+ReactDOM.render(<GroceryList items={['kale', 'cucumbers']}/>, document.getElementById('app'));*/
+
+//state
+const {useState} = React;
+
+const GroceryListItem = (props) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const style = {
+    fontWeight: isHovered? 'bold' : 'normal',
+  }
+
+  return (
+    <li style ={style}
+    onMouseOver ={() => setIsHovered(!isHovered)}
+    onMouseOut ={() => setIsHovered(isHovered)}
+    >
+      {props.item}
+      </li>
+  );
+
+};
 
 
 
+
+  const GroceryList = (props) => (
+    <ul>
+      {props.items.map((item) => (
+        <GroceryListItem item={item} />
+      ))}
+    </ul>
+  );
+  ReactDOM.render(<GroceryList items={['kale', 'cucumbers']} />, document.getElementById('app'));
 
 
 
